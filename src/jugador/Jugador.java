@@ -1,9 +1,7 @@
 
-package Jugador;
+package jugador;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 

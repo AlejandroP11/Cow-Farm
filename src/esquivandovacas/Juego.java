@@ -8,7 +8,7 @@ import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
-import Jugador.*;
+import jugador.*;
 import LibreriaAlex.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -20,7 +20,7 @@ import java.awt.Font;
  */
 public class Juego extends JPanel{
 
-    int juY, juX; //localizacion del coche
+    int juY, juX; //localizacion del jugador
     int carX,carY; //localizacion de la carretera 
     Jugador coche = new Tractor();
     int numV; //numero de vacas en la carretera

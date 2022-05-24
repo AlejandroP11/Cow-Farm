@@ -1,4 +1,4 @@
-package Jugador;
+package jugador;
 
 import java.awt.*;
 

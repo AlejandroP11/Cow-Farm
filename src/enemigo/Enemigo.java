@@ -1,4 +1,4 @@
-package Enemigo;
+package enemigo;
 
 public class Enemigo {
 
