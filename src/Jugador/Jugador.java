@@ -1,5 +1,5 @@
 
-package esquivandovacas;
+package Jugador;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,23 +12,33 @@ import javax.swing.JPanel;
  * @author Alejandro Pereiro G
  * @author David Braga
  */
-public class Coche extends JPanel{
-    int veloX, veloY; //velocidad del coche tanto en x como en y
-    boolean sube,baja,izq,der; //para saber hacia que lado se mueve el coche
-    public void paint(Graphics g, int cocheX, int cocheY){
-        super.paint(g); //llamamos al metodo repaint 
-        Graphics2D obj = (Graphics2D) g; //creamos un objeto de la clase Graphics2D para dibujar
-        obj.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //usamos la clase RenderingHints para renderizar
-        try{
-            obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\tractor.png"),cocheX,cocheY,this);   //dibuja el coche en la vetana
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
+public abstract class Jugador extends JPanel{
+    private int veloX, veloY; //velocidad del coche tanto en x como en y
+    private boolean sube,baja,izq,der; //para saber hacia que lado se mueve el coche
+
+    public int getVeloX() {
+        return veloX;
     }
+
+    public void setVeloX(int veloX) {
+        this.veloX = veloX;
+    }
+
+    public int getVeloY() {
+        return veloY;
+    }
+
+    public void setVeloY(int veloY) {
+        this.veloY = veloY;
+    }
+
+    public abstract void paint(Graphics g, int juX, int juY);
+    public abstract int restringirX(int juX);
+    public abstract int restringirY(int juY);
+
     
     //metodo que utiliza la entrada del ususario para mover el coche
-    public void moverCoche(KeyEvent e){
+    public void moverJugador(KeyEvent e){
         if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT){ //si el usuario clickea la A o la fecha izquierda
             izq = true;
             veloX = -1; //mueve el coche a la izquierda
@@ -48,7 +58,7 @@ public class Coche extends JPanel{
     }
     
     //metodo que utiliza la entrada del usuario para detener el coche
-    public void stopCoche(KeyEvent e){
+    public void stopJugador(KeyEvent e){
         if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT){
             izq = false;
             veloX = 0; //ponemos la velocidad del coche en cero

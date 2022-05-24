@@ -8,6 +8,7 @@ import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
+import Jugador.*;
 import LibreriaAlex.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -19,9 +20,9 @@ import java.awt.Font;
  */
 public class Juego extends JPanel{
 
-    int cocheY,cocheX; //localizacion del coche
+    int juY, juX; //localizacion del coche
     int carX,carY; //localizacion de la carretera 
-    Coche coche = new Coche();
+    Jugador coche = new Tractor();
     int numV; //numero de vacas en la carretera
     int vX[], vY[]; //arrays que contienen las localizaciones de las vacas
     int velV[]; //array que contiene la velocidad de las vacas
@@ -39,18 +40,18 @@ public class Juego extends JPanel{
 
             @Override
             public void keyPressed(KeyEvent e) {//cuando presionamos una tecla
-                 coche.moverCoche(e);//mover el coche en la direccion indicada
+                 coche.moverJugador(e);//mover el coche en la direccion indicada
             }
 
             @Override
             public void keyReleased(KeyEvent e) {//cuando soltamos la tecla
-                coche.stopCoche(e);//dejar de mover el coche
+                coche.stopJugador(e);//dejar de mover el coche
             }
     });    
         setFocusable(true);//indicamos que el JPanel es focuseable
         carX = carY = 999; //inicializamos la localizacion del cruce de carreteras a (-999,-999)
-        cocheY = 300; //inicializamos los valores de coche 
-        cocheX = 250;
+        juY = 300; //inicializamos los valores del jugador
+        juX = 250;
         numV = 0; //inicializamos el numero de vacas
         vX = new int[20]; //inicializamos las posiciones de las vacas
         vY = new int[20];
@@ -71,11 +72,11 @@ public class Juego extends JPanel{
             if(carY <= 599 && carX <= 599) //si la localizacion del cruce de carretera es menor de 599 en x,y
                 obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\cross_road.png"),carX,carY,this);//dibujar el cruce de carreteras
             
-            coche.paint(g, cocheX, cocheY);//dibujar el coche
-            
+            coche.paint(g, juX, juY);//dibujar al jugador
+
             if(seAcabo)//si se acabo es verdad
-                obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\vacaded.png"),cocheX-30,cocheY-30,this);//dibujar la imagen de choque 
-            
+                obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\vacaded.png"), juX -30, juY -30,this);//dibujar la imagen de choque
+
             if(this.numV > 0){//si el numero de vacas es mayor que cero
                 for(int i = 0; i < this.numV; i++)//por cada vaca
                     obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\vaca.png"),this.vX[i],this.vY[i],this);//dibujar vaca
@@ -104,21 +105,11 @@ public class Juego extends JPanel{
             carY = carX = 999; //llevarlo de nuevo al inicio
         }
  
-        cocheX += coche.veloX; //actualizar la posicion del coche
-        cocheY += coche.veloY;
+        juX += coche.getVeloX(); //actualizar la posicion del coche
+        juY += coche.getVeloY();
         
-        //casos para restringir el moviento del coche para que no se salga de la carretera
-        if(cocheY < 0)  //si el coche ha llegado o ha pasado el borde superior 
-            cocheY = 0; //mantenerlo en 0 de y
-        
-        if(cocheY+150 >= 600) //si el coche ha llegado o ha pasado el borde inferior
-            cocheY = 600-150; //mantenerlo en el borde maximo de y
-        
-        if(cocheX < 145)    //si el coche ha llegado o ha pasado el borde izquierdo
-            cocheX = 145;   //mantenerlo en el borde minimo de x
-        
-        if(cocheX+135 > 500)  //si el coche ha llegado o ha pasado el borde derecho
-            cocheX = 500-135; //mantenerlo en el borde maximo de x
+        juX = coche.restringirX(juX);
+        juY = coche.restringirY(juY);
         
         for(int i = 0; i < this.numV; i++) //para todas las vacas
             this.vY[i] += velV[i]; //moverlas basandonos en la velocidad indicada
@@ -152,9 +143,9 @@ public class Juego extends JPanel{
         //Chequamos el choque
         int dif = 0; //la diferencia de posicion entre el coche y las vacas 
         for(int i = 0; i < numV; i++){ //por cada vaca
-            dif = cocheX - vX[i]; //diferencia es la distancia entre el coche y las vacas 
-            if((vX[i] >= cocheX && vX[i] <= cocheX+65) || (vX[i]+65 >= cocheX && vX[i]+65 <= cocheX+65)){ //si se choca horizontalmente
-                if(cocheY+50 >= vY[i] && !(cocheY >= vY[i]+50)){ //y si hay choque vertical
+            dif = juX - vX[i]; //diferencia es la distancia entre el coche y las vacas
+            if((vX[i] >= juX && vX[i] <= juX +65) || (vX[i]+65 >= juX && vX[i]+65 <= juX +65)){ //si se choca horizontalmente
+                if(juY +50 >= vY[i] && !(juY >= vY[i]+50)){ //y si hay choque vertical
                     this.finaliza(); //se llama al metodo finaliza y se acaba el juego
                 }
             }
