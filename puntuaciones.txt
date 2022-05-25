@@ -1,5 +1,5 @@
 Alejandro, 10, 0
+Alejandro, 10, 0
+alejandro, 9, 4
 Juan, 8, 4
-Eduardo, 8, 2
-David, 7, 3
-Andres, 6, 4
+, 8, 4

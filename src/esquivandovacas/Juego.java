@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Font;
 import jugador.*;
+import enemigo.*;
 import LibreriaAlex.*;
 
 
@@ -23,7 +24,8 @@ public class Juego extends JPanel{
 
     int juY, juX; //localizacion del jugador
     int carX,carY; //localizacion de la carretera 
-    Jugador coche = new Coche();
+    Jugador coche = new Tractor();
+    Enemigo en = new Vaca();
     int numV; //numero de vacas en la carretera
     int vX[], vY[]; //arrays que contienen las localizaciones de las vacas
     int velV[];
@@ -76,12 +78,13 @@ public class Juego extends JPanel{
             coche.paint(g, juX, juY);//dibujar al jugador
 
             if(seAcabo)//si se acabo es verdad
-                obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\vacaded.png"), juX -30, juY -30,this);//dibujar la imagen de choque
+                en.paintS(g, juX, juY);
 
             if(this.numV > 0){//si el numero de vacas es mayor que cero
                 for(int i = 0; i < this.numV; i++)//por cada vaca
-                    obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\capibara.png"),this.vX[i],this.vY[i],this);//dibujar vaca
+                        en.paint(g, vX[i], vY[i]);
                     }
+
             Font f = new Font("Times Roman", Font.BOLD + Font.ITALIC, 20);//inicializamos fuente
             g.setFont(f);//hacemos el set de la fuente 
             g.setColor(Color.red);//la ponemos de color rojo
