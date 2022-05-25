@@ -8,10 +8,11 @@ import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
-import jugador.*;
-import LibreriaAlex.*;
 import java.awt.Color;
 import java.awt.Font;
+import jugador.*;
+import LibreriaAlex.*;
+
 
 /**
  *
@@ -22,15 +23,15 @@ public class Juego extends JPanel{
 
     int juY, juX; //localizacion del jugador
     int carX,carY; //localizacion de la carretera 
-    Jugador coche = new Tractor();
+    Jugador coche = new Coche();
     int numV; //numero de vacas en la carretera
     int vX[], vY[]; //arrays que contienen las localizaciones de las vacas
-    int velV[]; //array que contiene la velocidad de las vacas
+    int velV[];
+
     Puntuacion puntuacion = new Puntuacion();
     int puntos, nivel; //numero de puntos y nivel en el que se encuentra
     boolean seAcabo; //para saber si se acabo la partida o no
-    
-    
+
     public Juego(){
         //Listener para obtener cuando una tecla es presionada y soltada
         addKeyListener(new KeyListener(){
@@ -47,7 +48,7 @@ public class Juego extends JPanel{
             public void keyReleased(KeyEvent e) {//cuando soltamos la tecla
                 coche.stopJugador(e);//dejar de mover el coche
             }
-    });    
+    });
         setFocusable(true);//indicamos que el JPanel es focuseable
         carX = carY = 999; //inicializamos la localizacion del cruce de carreteras a (-999,-999)
         juY = 300; //inicializamos los valores del jugador
@@ -55,7 +56,7 @@ public class Juego extends JPanel{
         numV = 0; //inicializamos el numero de vacas
         vX = new int[20]; //inicializamos las posiciones de las vacas
         vY = new int[20];
-        velV =  new int[20]; //inicializamos la velocidad de las vacas
+        velV = new int[20]; //inicializamos la velocidad de las vacas
         puntos = 0; //inicializamos puntos
         nivel = 1; //inicializamos nivel
         seAcabo = false;//inicializamos se acabo en falso
@@ -79,7 +80,7 @@ public class Juego extends JPanel{
 
             if(this.numV > 0){//si el numero de vacas es mayor que cero
                 for(int i = 0; i < this.numV; i++)//por cada vaca
-                    obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\vaca.png"),this.vX[i],this.vY[i],this);//dibujar vaca
+                    obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\capibara.png"),this.vX[i],this.vY[i],this);//dibujar vaca
                     }
             Font f = new Font("Times Roman", Font.BOLD + Font.ITALIC, 20);//inicializamos fuente
             g.setFont(f);//hacemos el set de la fuente 
@@ -126,6 +127,7 @@ public class Juego extends JPanel{
                 vX[c] = vX[i]; //le damos el valor de la poscion i a la poscion c 
                 vY[c] = vY[i];
                 velV[c] = velV[i];
+
                 c++; //aumentamos c 
             }
         }
