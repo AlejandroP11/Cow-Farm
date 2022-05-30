@@ -23,7 +23,7 @@ public class Juego extends JPanel{
 
     int juY, juX; //localizacion del jugador
     int carX,carY; //localizacion de la carretera 
-    Jugador coche = new Tractor();
+    Jugador coche = new Moto();
     int numV; //numero de vacas en la carretera
     int vX[], vY[]; //arrays que contienen las localizaciones de las vacas
     int velV[];
