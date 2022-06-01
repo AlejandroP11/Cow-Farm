@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import jugador.*;
+import enemigo.*;
+
 
 
 
@@ -22,8 +24,9 @@ import jugador.*;
 public class Juego extends JPanel{
 
     int juY, juX; //localizacion del jugador
-    int carX,carY; //localizacion de la carretera 
-    Jugador coche = new Moto();
+    int carX,carY; //localizacion de la carretera
+    Jugador coche = new Tractor();
+    Enemigo en = new Capibara();
     int numV; //numero de vacas en la carretera
     int vX[], vY[]; //arrays que contienen las localizaciones de las vacas
     int velV[];
@@ -155,7 +158,7 @@ public class Juego extends JPanel{
     }
         //metodo que se encarga de las funciones finales del juego
         public void finaliza(){
-        seAcabo = true; //indicamos que el juego se ha acabado 
+        seAcabo = true; //indicamos que el juego se ha acabado
         String n = JOptionPane.showInputDialog("Introduce tu nombre"); //le pedimos al jugador que introduzca su nombre
         Puntuacion pu = new Puntuacion(n, nivel, puntos); //creamos un objeto puntuacion con el nombre, nivel y puntos conseguidos
         pu.laMejorPuntuacion("puntuaciones.txt", "\\s*,\\s*", pu); //llamamos al metodo mejor puntuacion

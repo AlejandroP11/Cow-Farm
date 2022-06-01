@@ -10,7 +10,7 @@ public class Moto extends Jugador{
         Graphics2D obj = (Graphics2D) g; //creamos un objeto de la clase Graphics2D para dibujar
         obj.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //usamos la clase RenderingHints para renderizar
         try{
-            obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\moto.png"), juX, juY,this);   //dibuja el coche en la vetana
+            obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\IdeaProjects\\EsquivandoVacas\\Imagenes\\moto.png"), juX, juY,this);   //dibuja el coche en la vetana
         }
         catch(Exception e){
             System.out.println(e);
