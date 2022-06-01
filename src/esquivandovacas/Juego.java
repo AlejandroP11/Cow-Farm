@@ -7,12 +7,13 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import jugador.*;
 import enemigo.*;
-import LibreriaAlex.*;
+
+
 
 
 /**
@@ -23,9 +24,9 @@ import LibreriaAlex.*;
 public class Juego extends JPanel{
 
     int juY, juX; //localizacion del jugador
-    int carX,carY; //localizacion de la carretera 
+    int carX,carY; //localizacion de la carretera
     Jugador coche = new Tractor();
-    Enemigo en = new Vaca();
+    Enemigo en = new Capibara();
     int numV; //numero de vacas en la carretera
     int vX[], vY[]; //arrays que contienen las localizaciones de las vacas
     int velV[];
@@ -71,9 +72,9 @@ public class Juego extends JPanel{
         Graphics2D obj = (Graphics2D) g; //creamos un objeto de la clase Graphics2D para dibujar
         obj.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //usamos la clase RenderingHints para renderizar
         try{
-            obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\st_road2.png"), 0, 0 ,this);//dibujar la carretera principal
+            obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\IdeaProjects\\EsquivandoVacas\\Imagenes\\st_road2.png"), 0, 0 ,this);//dibujar la carretera principal
             if(carY <= 599 && carX <= 599) //si la localizacion del cruce de carretera es menor de 599 en x,y
-                obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\cross_road.png"),carX,carY,this);//dibujar el cruce de carreteras
+                obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\IdeaProjects\\EsquivandoVacas\\Imagenes\\cross_road.png"),carX,carY,this);//dibujar el cruce de carreteras
             
             coche.paint(g, juX, juY);//dibujar al jugador
 
@@ -158,13 +159,13 @@ public class Juego extends JPanel{
     }
         //metodo que se encarga de las funciones finales del juego
         public void finaliza(){
-        seAcabo = true; //indicamos que el juego se ha acabado 
-        String n = LeerDatos.leerString("Introduce tu nombre"); //le pedimos al jugador que introduzca su nombre
+        seAcabo = true; //indicamos que el juego se ha acabado
+        String n = JOptionPane.showInputDialog("Introduce tu nombre"); //le pedimos al jugador que introduzca su nombre
         Puntuacion pu = new Puntuacion(n, nivel, puntos); //creamos un objeto puntuacion con el nombre, nivel y puntos conseguidos
         pu.laMejorPuntuacion("puntuaciones.txt", "\\s*,\\s*", pu); //llamamos al metodo mejor puntuacion
         pu.escribirPuntuacion("puntuaciones.txt", "\\s*,\\s*", pu);//llamamos al metodo escribir puntuacion
         pu.verMejoresPuntuacion("puntuaciones.txt", "\\s*,\\s*");  //llamamos al metodo ver mejores puntuaciones
-        String s=LeerDatos.leerString("Quieres volver a jugar? s/n"); //le preguntamos al jugador si quiere volver a jugar
+        String s=JOptionPane.showInputDialog("Quieres volver a jugar? s/n"); //le preguntamos al jugador si quiere volver a jugar
         if(s.equalsIgnoreCase("s")){ //si el jugador responde que si 
             Main.main(null); //comenzamos el juego de nuevo
         }
