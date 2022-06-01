@@ -7,11 +7,11 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import jugador.*;
-import LibreriaDavid.*;
+
 
 
 /**
@@ -156,12 +156,12 @@ public class Juego extends JPanel{
         //metodo que se encarga de las funciones finales del juego
         public void finaliza(){
         seAcabo = true; //indicamos que el juego se ha acabado 
-        String n = LeerDatos.leerString("Introduce tu nombre"); //le pedimos al jugador que introduzca su nombre
+        String n = JOptionPane.showInputDialog("Introduce tu nombre"); //le pedimos al jugador que introduzca su nombre
         Puntuacion pu = new Puntuacion(n, nivel, puntos); //creamos un objeto puntuacion con el nombre, nivel y puntos conseguidos
         pu.laMejorPuntuacion("puntuaciones.txt", "\\s*,\\s*", pu); //llamamos al metodo mejor puntuacion
         pu.escribirPuntuacion("puntuaciones.txt", "\\s*,\\s*", pu);//llamamos al metodo escribir puntuacion
         pu.verMejoresPuntuacion("puntuaciones.txt", "\\s*,\\s*");  //llamamos al metodo ver mejores puntuaciones
-        String s=LeerDatos.leerString("Quieres volver a jugar? s/n"); //le preguntamos al jugador si quiere volver a jugar
+        String s=JOptionPane.showInputDialog("Quieres volver a jugar? s/n"); //le preguntamos al jugador si quiere volver a jugar
         if(s.equalsIgnoreCase("s")){ //si el jugador responde que si 
             Main.main(null); //comenzamos el juego de nuevo
         }
