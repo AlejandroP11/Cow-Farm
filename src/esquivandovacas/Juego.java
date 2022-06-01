@@ -72,19 +72,20 @@ public class Juego extends JPanel{
         Graphics2D obj = (Graphics2D) g; //creamos un objeto de la clase Graphics2D para dibujar
         obj.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //usamos la clase RenderingHints para renderizar
         try{
-            obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\st_road2.png"), 0, 0 ,this);//dibujar la carretera principal
+            obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\IdeaProjects\\EsquivandoVacas\\Imagenes\\st_road2.png"), 0, 0 ,this);//dibujar la carretera principal
             if(carY <= 599 && carX <= 599) //si la localizacion del cruce de carretera es menor de 599 en x,y
-                obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\cross_road.png"),carX,carY,this);//dibujar el cruce de carreteras
+                obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\IdeaProjects\\EsquivandoVacas\\Imagenes\\cross_road.png"),carX,carY,this);//dibujar el cruce de carreteras
             
             coche.paint(g, juX, juY);//dibujar al jugador
 
             if(seAcabo)//si se acabo es verdad
-                obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\vacaded.png"), juX -30, juY -30,this);//dibujar la imagen de choque
+                en.paintS(g, juX, juY);
 
             if(this.numV > 0){//si el numero de vacas es mayor que cero
                 for(int i = 0; i < this.numV; i++)//por cada vaca
-                    obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\OneDrive\\Documentos\\NetBeansProjects\\EsquivandoVacas\\Imagenes\\capibara.png"),this.vX[i],this.vY[i],this);//dibujar vaca
+                        en.paint(g, vX[i], vY[i]);
                     }
+
             Font f = new Font("Times Roman", Font.BOLD + Font.ITALIC, 20);//inicializamos fuente
             g.setFont(f);//hacemos el set de la fuente 
             g.setColor(Color.red);//la ponemos de color rojo
