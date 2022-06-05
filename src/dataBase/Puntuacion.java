@@ -1,5 +1,5 @@
 
-package esquivandovacas;
+package dataBase;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
  * @author David Braga
  */
 public class Puntuacion implements Comparable<Puntuacion>{
-    private String nombre; //nombre del jugador
     private int punt; //cantidad de puntos obtenidos por nivel
     private  int nivel; //niveles superados
     
@@ -25,21 +24,12 @@ public class Puntuacion implements Comparable<Puntuacion>{
     }
     
     //constructor con todos los atributos
-    public Puntuacion(String nombre, int nivel, int punt) {
-        this.nombre = nombre;
+    public Puntuacion(int nivel, int punt) {
         this.nivel = nivel;
         this.punt = punt;
     }
     
     //geters y seters de todos los atributos
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public int getPunt() {
         return punt;
     }
@@ -71,7 +61,7 @@ public class Puntuacion implements Comparable<Puntuacion>{
     //metodo toString para escribir las puntuaciones
     @Override
     public String toString() {
-        return "nombre: "+ getNombre() + "----> nivel: " + getNivel();
+        return "----> nivel: " + getNivel();
     }
     
     Scanner sc;     //declaramos un scanner
@@ -89,7 +79,7 @@ public class Puntuacion implements Comparable<Puntuacion>{
             while(sc.hasNextLine()){ //si tiene mas lineas
                 ca = sc.nextLine();  //metemos dentro del objeto String la siguiente linea
                 String[]li = ca.split(deli); //separamos ca por un delimitador y lo introducimos en un Array
-                pu = new Puntuacion(li[0], Integer.parseInt(li[1]), Integer.parseInt(li[2])); //construimos el objeto Puntuacion
+                pu = new Puntuacion(Integer.parseInt(li[1]), Integer.parseInt(li[2])); //construimos el objeto Puntuacion
                 lista.add(pu); //agregamos el objeto al ArrayList
             }
         } catch (FileNotFoundException ex) {
@@ -101,7 +91,7 @@ public class Puntuacion implements Comparable<Puntuacion>{
     }
     
     //metodo para comparar la puntuacion conseguida con la mejor puntuacion que esta archivada
-    public void laMejorPuntuacion(String fic, String deli, Puntuacion p){
+    /*public void laMejorPuntuacion(String fic, String deli, Puntuacion p){
         ArrayList<Puntuacion>lista = new ArrayList<Puntuacion>(); //instanciamos un ArrayList de puntuacion
         lista = leerPuntuacion(fic, deli); //llamamos al metodo leerPuntuacion
         if(p.compareTo(lista.get(0)) == -1 || p.compareTo(lista.get(0)) == 0) //si la puntuacion que pasamos con parametro es mayor que la mejor puntuacion anotada
@@ -165,6 +155,6 @@ public class Puntuacion implements Comparable<Puntuacion>{
                 }
             }
         }
-    }
+    }*/
 }
 
