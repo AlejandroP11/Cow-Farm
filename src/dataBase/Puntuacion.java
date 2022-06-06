@@ -1,6 +1,6 @@
 
 package dataBase;
-
+//importación de librerias
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  * @author Alejandro Pereiro G
  * @author David Braga
  */
+//declaracion de variables de la clase puntuación
 public class Puntuacion implements Comparable<Puntuacion>{
     private int punt; //cantidad de puntos obtenidos por nivel
     private  int nivel; //niveles superados
@@ -89,72 +90,6 @@ public class Puntuacion implements Comparable<Puntuacion>{
         }
         return lista;  //devolvemos el ArrayList
     }
-    
-    //metodo para comparar la puntuacion conseguida con la mejor puntuacion que esta archivada
-    /*public void laMejorPuntuacion(String fic, String deli, Puntuacion p){
-        ArrayList<Puntuacion>lista = new ArrayList<Puntuacion>(); //instanciamos un ArrayList de puntuacion
-        lista = leerPuntuacion(fic, deli); //llamamos al metodo leerPuntuacion
-        if(p.compareTo(lista.get(0)) == -1 || p.compareTo(lista.get(0)) == 0) //si la puntuacion que pasamos con parametro es mayor que la mejor puntuacion anotada
-            JOptionPane.showMessageDialog(null, "FELICIDADES!!!!!!\nHAS HECHO LA MEJOR PUNTUACION"); //sacamos por pantalla 
-    }
-    
-    //metodo para ver las mejores puntuaciones
-    public void verMejoresPuntuacion(String fic, String deli){
-        ArrayList<Puntuacion>lista = new ArrayList<Puntuacion>(); //instanciamos un ArrayList de puntuacion
-        lista = leerPuntuacion(fic, deli); //llamamos al metodo leerPuntuacion
-        System.out.println("Mejores puntuaciones"); //sacamos por pantalla
-        for(Puntuacion x : lista){ //usamos un for each para los elementos del ArrayList
-            System.out.println(x.toString()); //sacamos por pantalla
-        }
-    }
-    
-    //metodo para escribir en el archivo las mejores puntuaciones
-    public void escribirPuntuacion(String fic, String deli, Puntuacion p){
-        File fich = new File(fic); //creamos un objeto de tipo File
-        ArrayList<Puntuacion>lista = new ArrayList<Puntuacion>(); //instanciamos un ArrayList de puntuacion
-        if(fich.exists()){ //si el objeto File existe
-            lista = leerPuntuacion(fic,deli); //llamamos al metodo leerPuntuacion
-            try {
-                fi=new FileWriter(fic); //usamos el objeto FileWriter 
-                es=new PrintWriter(fi); //usamos el objeto PrintWriter
-                lista.add(p); //agregamos al ArryList la Puntuacion que pasamos por parametro
-                Collections.sort(lista); //ordenamos el ArrayList
-                for(int i = 0; i < lista.size() && i < 5; i++){ //mientras sea menor que el tamaño de la lista o menor que cinco
-                    es.print(lista.get(i).getNombre()+", "); //escribimos el nombre y una ,
-                    es.print(lista.get(i).getNivel()+", "); //escribimos el nivel y una ,
-                    es.println(lista.get(i).getPunt()); //escribimos los puntos y saltamos de linea
-                }
-            } catch (IOException ex) {
-                System.out.println("Error de escritura "+ex.getMessage());
-            } finally {
-                try {
-                    es.close(); //cerramos el PrinWriter
-                    fi.close(); //cerramos el FileWriter
-                } catch (IOException ex) {
-                    System.out.println("Error al cerrar el fichero "+ex.getMessage());
-                }
-            }
-        } else{ //de no existir el objeto File
-            try {
-                fi=new FileWriter(fic); //usamos el objeto FileWriter 
-                es=new PrintWriter(fi); //usamos el objeto PrintWriter
-                lista.add(p); //agregamos al ArryList la Puntuacion que pasamos por parametro
-                for(int i = 0; i < lista.size(); i++){ //mientras sea menor que el tamaño de la lista
-                    es.print(lista.get(i).getNombre()+", "); //escribimos el nombre y una ,
-                    es.print(lista.get(i).getNivel()+", "); //escribimos el nivel y una ,
-                    es.println(lista.get(i).getPunt()); //escribimos los puntos y saltamos de linea
-                }
-            } catch (IOException ex) {
-                System.out.println("Error de escritura "+ex.getMessage());
-            } finally {
-                try {
-                    es.close(); //cerramos el PrinWriter
-                    fi.close(); //cerramos el FileWriter
-                } catch (IOException ex) {
-                    System.out.println("Error al cerrar el fichero "+ex.getMessage());
-                }
-            }
-        }
-    }*/
+
 }
 

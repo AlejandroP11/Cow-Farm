@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import dataBase.*;
 import jugador.*;
 import enemigo.*;
+import Ventanas.*;
 
 
 
@@ -184,7 +185,12 @@ public class Juego extends JPanel{
             Tablero tp = new Tablero(); //comenzamos el juego de nuevo
         }
         else //de no ser asi
-            System.exit(0); //finalizamos el juego
+        {
+            Menu4 m4 = new Menu4();
+            m4.setVisible(true);
+            //Falta cerrar ventana
+        }
+
     }
 }
     

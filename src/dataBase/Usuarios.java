@@ -1,15 +1,15 @@
 package dataBase;
-
+//declaracion de variables para la creacion de usuarios
 public class Usuarios {
     private int id;
     private String usuario;
     private String contraseña;
-
+//contructor
     public Usuarios(String usuario, String contraseña) {
         this.usuario = usuario;
         this.contraseña = contraseña;
     }
-
+//getters y setters
     public int getId() {
         return id;
     }
