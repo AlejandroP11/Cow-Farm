@@ -5,17 +5,23 @@
  */
 package Ventanas;
 
+import dataBase.Conexion;
+import esquivandovacas.Juego;
+
 /**
  *
  * @author david
  */
 public class menu6 extends javax.swing.JFrame {
-
+    int j = 0; //eleccion de la skin del jugador
+    int e = 0; //eleccion de la skin de los enemigos
     /**
      * Creates new form menu6
      */
     public menu6() {
+        setLocation(550, 300);
         initComponents();
+
     }
 
     /**
@@ -35,24 +41,50 @@ public class menu6 extends javax.swing.JFrame {
         atras = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
 
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tractor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tractor.png"))); // NOI18N
+        tractor.setIcon(new javax.swing.ImageIcon("C:\\Users\\34653\\IdeaProjects\\EsquivandoVacas\\Imagenes\\tractor.png")); // NOI18N
         tractor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tractorActionPerformed(evt);
             }
         });
 
-        coche.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/coche.png"))); // NOI18N
+        coche.setIcon(new javax.swing.ImageIcon("C:\\Users\\34653\\IdeaProjects\\EsquivandoVacas\\Imagenes\\coche.png")); // NOI18N
+        coche.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cocheActionPerformed(evt);
+            }
+        });
 
-        moto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/moto.png"))); // NOI18N
+        moto.setIcon(new javax.swing.ImageIcon("C:\\Users\\34653\\IdeaProjects\\EsquivandoVacas\\Imagenes\\moto.png")); // NOI18N
+        moto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motoActionPerformed(evt);
+            }
+        });
 
-        vaca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/vaca.png"))); // NOI18N
+        vaca.setIcon(new javax.swing.ImageIcon("C:\\Users\\34653\\IdeaProjects\\EsquivandoVacas\\Imagenes\\vaca.png")); // NOI18N
+        vaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vacaActionPerformed(evt);
+            }
+        });
 
-        jabali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/jabali.png"))); // NOI18N
+        jabali.setIcon(new javax.swing.ImageIcon("C:\\Users\\34653\\IdeaProjects\\EsquivandoVacas\\Imagenes\\jabali.png")); // NOI18N
+        jabali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jabaliActionPerformed(evt);
+            }
+        });
 
-        capibara.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/capibara.png"))); // NOI18N
+        capibara.setIcon(new javax.swing.ImageIcon("C:\\Users\\34653\\IdeaProjects\\EsquivandoVacas\\Imagenes\\capibara.png")); // NOI18N
+        capibara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                capibaraActionPerformed(evt);
+            }
+        });
 
         atras.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         atras.setText("Atrás");
@@ -132,16 +164,33 @@ public class menu6 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tractorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tractorActionPerformed
-        // TODO add your handling code here:
+        j = 0;
     }//GEN-LAST:event_tractorActionPerformed
-
+    private void cocheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tractorActionPerformed
+        j = 1;
+    }//GEN-LAST:event_tractorActionPerformed
+    private void motoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tractorActionPerformed
+        j =2;
+    }//GEN-LAST:event_tractorActionPerformed
+    private void vacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tractorActionPerformed
+        e = 0;
+    }//GEN-LAST:event_tractorActionPerformed
+    private void jabaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tractorActionPerformed
+        e = 1;
+    }//GEN-LAST:event_tractorActionPerformed
+    private void capibaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tractorActionPerformed
+        e = 2;
+    }//GEN-LAST:event_tractorActionPerformed
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
     Menu4 m4 = new Menu4();
+    m4.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_atrasActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-        // TODO add your handling code here:
+        Juego ju = new Juego();
+        Conexion con = Conexion.getInstance();
+        con.insertarSkins(ju.id, j, e);
     }//GEN-LAST:event_guardarActionPerformed
 
     /**

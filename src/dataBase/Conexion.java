@@ -1,5 +1,7 @@
 package dataBase;
 
+import esquivandovacas.Juego;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
@@ -51,31 +53,44 @@ public class Conexion {
         }
     }
 
-    public int iniciarSesion(Usuarios us){
-        String sql = "SELECT id FROM usuario WHERE usuario= '" + us.getUsuario() + "' AND contraseña='" + us.getContraseña() + "'";
-        int resul = 0;
+    public boolean iniciarSesion(Usuarios us){
+        String sql = "SELECT * FROM usuario WHERE usuario= '" + us.getUsuario() + "' AND contraseña='" + us.getContraseña() + "'";
         try {
             rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Sesión iniciada");
-                resul = rs.getInt("id");
+                return true;
             }
-            else
-                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecto");
+            else{
+                JOptionPane.showMessageDialog(null, "Error en el usuario o la contraseñá");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error " + e.getMessage());
+            return false;
+        }
+    }
+    public int valorID(Usuarios us) {
+        String sql = "SELECT * FROM usuario WHERE usuario= '" + us.getUsuario() + "' AND contraseña='" + us.getContraseña() + "'";
+        int res = 0;
+        try {
+            rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                res = rs.getInt("id");
+            }
         } catch (SQLException e) {
             System.out.println("Error " + e.getMessage());
         }
-        return resul;
+        return res;
     }
     public boolean guardarPuntuacion(int id ,Puntuacion pu){
-        String sql = "INSERT INTO puntuaciones (id, punt, nivel) VALUES(?,?,?)";
+        String sql = "INSERT INTO puntuaciones (id_punt, punt, nivel) VALUES(?,?,?)";
         try {
             PreparedStatement ps = stmt.getConnection().prepareStatement(sql);
             ps.setInt(1, id);
             ps.setInt(2, pu.getPunt());
             ps.setInt(3, pu.getNivel());
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Usuario creado");
             return true;
         } catch (SQLException e) {
             System.out.println("Error en la creacion del usuario" + e.getMessage());
@@ -84,7 +99,7 @@ public class Conexion {
     }
     public DefaultTableModel verPuntuaciones(){
         DefaultTableModel model = new DefaultTableModel();
-        String sql = "SELECT usuario, nivel, punt FROM usuario, puntuaciones WHERE usaurio.id=puntuaciones.id ORDER BY puntuaciones.nivel, puntuaciones.punt";
+        String sql = "SELECT usuario, nivel, punt FROM usuario, puntuaciones WHERE id=id_punt ORDER BY puntuaciones.nivel DESC, puntuaciones.punt DESC";
         try {
             rs = stmt.executeQuery(sql);
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -104,7 +119,7 @@ public class Conexion {
     }
 
     public void insertarSkins(int id, int ju, int en){
-        String sql = "INSERT INTO ima (id, jugador, enemigo) VALUES (?, ?, ?)";
+        String sql = "INSERT OR REPLACE INTO ima (id_ima, jugador, enemigo) VALUES (?, ?, ?)";
         try {
             PreparedStatement ps = stmt.getConnection().prepareStatement(sql);
             ps.setInt(1, id);
@@ -118,7 +133,7 @@ public class Conexion {
     }
 
     public int selecJu(int id){
-        String sql = "SELECT jugador FROM ima WHERE id=" + id;
+        String sql = "SELECT jugador FROM ima WHERE id_ima=" + id;
         int resul = 0;
         try {
             rs = stmt.executeQuery(sql);
@@ -130,7 +145,7 @@ public class Conexion {
         return resul;
     }
     public int selecEn(int id){
-        String sql = "SELECT enemigo FROM ima WHERE id=" + id;
+        String sql = "SELECT enemigo FROM ima WHERE id_ima=" + id;
         int resul = 0;
         try {
             rs = stmt.executeQuery(sql);

@@ -5,6 +5,10 @@
  */
 package Ventanas;
 
+import dataBase.Conexion;
+import dataBase.Usuarios;
+import esquivandovacas.Juego;
+
 /**
  *
  * @author david
@@ -15,7 +19,7 @@ public class Menu2 extends javax.swing.JFrame {
      * Creates new form menu2
      */
     public Menu2() {
-        this.setLocationRelativeTo(null);
+        setLocation(550, 300);
         initComponents();
     }
 
@@ -132,7 +136,17 @@ public class Menu2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseActionPerformed
-        // TODO add your handling code here:
+        String usuario = escribirusuario.getText();
+        String contraseña = escribircontrseña.getText();
+        Usuarios us = new Usuarios(usuario, contraseña);
+        Conexion con = Conexion.getInstance();
+        con.crearUsuario(us);
+        if(con.iniciarSesion(us)){
+            Juego.id = con.valorID(us);
+            Menu4 mn4 =new Menu4();
+            mn4.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_registrarseActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed

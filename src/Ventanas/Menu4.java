@@ -18,7 +18,7 @@ public class Menu4 extends javax.swing.JFrame {
      * Creates new form menu4
      */
     public Menu4() {
-        this.setLocationRelativeTo(null);
+        setLocation(550, 300);
         initComponents();
     }
 
@@ -109,16 +109,20 @@ public class Menu4 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
-    
-    this.dispose();
+        Tablero tb = new Tablero();
+        this.dispose();
     }//GEN-LAST:event_jugarActionPerformed
 
     private void puntuacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_puntuacionesActionPerformed
-        // TODO add your handling code here:
+        menu5 mn5 = new menu5();
+        mn5.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_puntuacionesActionPerformed
 
     private void cambiarskinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarskinActionPerformed
-        // TODO add your handling code here:
+        menu6 mn6 = new menu6();
+        mn6.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_cambiarskinActionPerformed
 
     /**
