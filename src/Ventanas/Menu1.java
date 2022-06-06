@@ -20,7 +20,7 @@ public class Menu1 extends javax.swing.JFrame {
      * Creates new form menu1
      */
     public Menu1() {
-        this.setLocationRelativeTo(null);
+        setLocation(550, 300);
         
         initComponents();
         
@@ -40,7 +40,7 @@ public class Menu1 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         iniciarsesion.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        iniciarsesion.setText("Iniciar Seisión");
+        iniciarsesion.setText("Iniciar Sesión");
         iniciarsesion.setToolTipText("");
         iniciarsesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

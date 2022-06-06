@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class Juego extends JPanel{
 
     int juY, juX; //localizacion del jugador
     int carX,carY; //localizacion de la carretera
-
+    Conexion con = Conexion.getInstance();
     ArrayList<Jugador> listajug = new ArrayList<>();
     ArrayList<Enemigo> listaen = new ArrayList<>();
     int elecJu;
@@ -36,6 +36,8 @@ public class Juego extends JPanel{
     int numV; //numero de vacas en la carretera
     int vX[], vY[]; //arrays que contienen las localizaciones de las vacas
     int velV[];
+
+    public static int id;
 
     Puntuacion puntuacion = new Puntuacion();
     int puntos, nivel; //numero de puntos y nivel en el que se encuentra
@@ -73,10 +75,11 @@ public class Juego extends JPanel{
         listajug.add(new Coche());
         listajug.add(new Moto());
         listaen.add(new Vaca());
-        listaen.add(new Capibara());
         listaen.add(new Jabali());
-        elecJu = 0;
-        elecEn = 0;
+        listaen.add(new Capibara());
+        elecJu = con.selecJu(id);
+        elecEn = con.selecEn(id);
+
     }
     //metodo para pintar todas las imagenes en la pantalla en posiciones especificas
     //la escena va a ser repintada cada vez que las posiciones cambian
@@ -174,26 +177,13 @@ public class Juego extends JPanel{
         //metodo que se encarga de las funciones finales del juego
         public void finaliza(){
         seAcabo = true; //indicamos que el juego se ha acabado
-        Conexion con = Conexion.getInstance();
-        Usuarios us = new Usuarios("Juan", "1624598");
-
-        if(con.crearUsuario(us))
-            JOptionPane.showMessageDialog(null, "Usuario creado");
-        else
-            JOptionPane.showMessageDialog(null, "Error en la creacion");
-            //id = con.iniciarSesion(us);
-        con.desconectar();
-
-        /*Puntuacion pu = new Puntuacion("Alejandro", nivel, puntos); //creamos un objeto puntuacion con el nombre, nivel y puntos conseguidos
-        pu.laMejorPuntuacion("puntuaciones.txt", "\\s*,\\s*", pu); //llamamos al metodo mejor puntuacion
-        pu.escribirPuntuacion("puntuaciones.txt", "\\s*,\\s*", pu);//llamamos al metodo escribir puntuacion
-        pu.verMejoresPuntuacion("puntuaciones.txt", "\\s*,\\s*");  //llamamos al metodo ver mejores puntuaciones
+        Puntuacion pu = new Puntuacion(nivel, puntos);
+        con.guardarPuntuacion(this.id, pu);
         String s=JOptionPane.showInputDialog("Quieres volver a jugar? s/n"); //le preguntamos al jugador si quiere volver a jugar
         if(s.equalsIgnoreCase("s")){ //si el jugador responde que si 
-            Main.main(null); //comenzamos el juego de nuevo
+            Tablero tp = new Tablero(); //comenzamos el juego de nuevo
         }
-        else //de no ser asi*/
-
+        else //de no ser asi
             System.exit(0); //finalizamos el juego
     }
 }
