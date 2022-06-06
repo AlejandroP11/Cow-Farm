@@ -191,6 +191,9 @@ public class menu6 extends javax.swing.JFrame {
         Juego ju = new Juego();
         Conexion con = Conexion.getInstance();
         con.insertarSkins(ju.id, j, e);
+        Menu4 mn4 = new Menu4();
+        mn4.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_guardarActionPerformed
 
     /**
