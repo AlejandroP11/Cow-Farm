@@ -99,7 +99,7 @@ public class Conexion {
     }
     public DefaultTableModel verPuntuaciones(){
         DefaultTableModel model = new DefaultTableModel();
-        String sql = "SELECT usuario, nivel, punt FROM usuario, puntuaciones WHERE id=id_punt ORDER BY puntuaciones.nivel DESC, puntuaciones.punt DESC";
+        String sql = "SELECT usuario, nivel, punt FROM usuario, puntuaciones WHERE id=id_punt ORDER BY puntuaciones.nivel DESC, puntuaciones.punt DESC LIMIT 10";
         try {
             rs = stmt.executeQuery(sql);
             ResultSetMetaData rsmd = rs.getMetaData();
