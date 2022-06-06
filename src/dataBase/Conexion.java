@@ -122,8 +122,9 @@ public class Conexion {
         }
         return model;
     }
-
+//método para la inserción de skins de jugador y enemigo
     public void insertarSkins(int id, int ju, int en){
+        //inserta o reemplaza los valores elegidos por el jugador en la bd
         String sql = "INSERT OR REPLACE INTO ima (id_ima, jugador, enemigo) VALUES (?, ?, ?)";
         try {
             PreparedStatement ps = stmt.getConnection().prepareStatement(sql);
@@ -131,13 +132,15 @@ public class Conexion {
             ps.setInt(2, ju);
             ps.setInt(3, en);
             ps.executeUpdate();
+            //mensage el cual nos verifica que han sido cambiadas
             JOptionPane.showMessageDialog(null, "Skins cambiadas");
         } catch (SQLException e) {
             System.out.println("Error " + e.getMessage());
         }
     }
-
+    //método para seleccionar jugador
     public int selecJu(int id){
+        //selecciona el jugador de imagen donde la id sea igual a la de la skin elegida
         String sql = "SELECT jugador FROM ima WHERE id_ima=" + id;
         int resul = 0;
         try {
@@ -149,7 +152,9 @@ public class Conexion {
         }
         return resul;
     }
+    //método para seleccionar enemigo
     public int selecEn(int id){
+        //selecciona el jugador de imagen donde la id sea igual a la de la skin elegida
         String sql = "SELECT enemigo FROM ima WHERE id_ima=" + id;
         int resul = 0;
         try {
