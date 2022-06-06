@@ -109,7 +109,14 @@ public class Menu4 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
-        Tablero tb = new Tablero();
+        Thread t=new Thread()
+        {
+            public void run()
+            {
+                Tablero tp = new Tablero();
+            }
+        };
+        t.start();
         this.dispose();
     }//GEN-LAST:event_jugarActionPerformed
 

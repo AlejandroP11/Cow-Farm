@@ -1,6 +1,6 @@
 
 package dataBase;
-//importación de librerias
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

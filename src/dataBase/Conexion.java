@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
 public class Conexion {
-    //creamos las variables para la conexion
+
     private static Conexion instance;
     private static Connection conn = null;
     private Statement stmt;
@@ -22,7 +22,7 @@ public class Conexion {
             e.printStackTrace();
         }
     }
-    //metodo de conexión
+
     public static Conexion getInstance(){
         //solo hago el new si es null
         if(instance == null)
@@ -30,7 +30,6 @@ public class Conexion {
         //devuelvo siempre la única instancia
         return instance;
     }
-    //metodo de desconexión
     public void desconectar(){
         try {
             if(conn != null)
@@ -39,7 +38,6 @@ public class Conexion {
             System.out.println("Error " + e.getMessage());
         }
     }
-    //Metodo el cual recoge los datos de registro y los guarda en la bd
     public boolean crearUsuario(Usuarios us){
         String sql = "INSERT INTO usuario (usuario, contraseña) VALUES(?,?)";
         try {
@@ -54,7 +52,7 @@ public class Conexion {
             return false;
         }
     }
-    //Método de incio de sesión el cual comprueba si los datos insertados son correctos y si no muestra el mensaje de error
+
     public boolean iniciarSesion(Usuarios us){
         String sql = "SELECT * FROM usuario WHERE usuario= '" + us.getUsuario() + "' AND contraseña='" + us.getContraseña() + "'";
         try {
@@ -72,6 +70,7 @@ public class Conexion {
             return false;
         }
     }
+
     //método para obtener el valor de la id del usuario que inicia sesión
     public int valorID(Usuarios us) {
         String sql = "SELECT * FROM usuario WHERE usuario= '" + us.getUsuario() + "' AND contraseña='" + us.getContraseña() + "'";
@@ -104,7 +103,7 @@ public class Conexion {
     //método de ver puntuaciones el cual muestra el usuario el nivel al que consiguió llegar y su puntuación en una tabla
     public DefaultTableModel verPuntuaciones(){
         DefaultTableModel model = new DefaultTableModel();
-        String sql = "SELECT usuario, nivel, punt FROM usuario, puntuaciones WHERE id=id_punt ORDER BY puntuaciones.nivel DESC, puntuaciones.punt DESC";
+        String sql = "SELECT usuario, nivel, punt FROM usuario, puntuaciones WHERE id=id_punt ORDER BY puntuaciones.nivel DESC, puntuaciones.punt DESC LIMIT 10";
         try {
             rs = stmt.executeQuery(sql);
             ResultSetMetaData rsmd = rs.getMetaData();
