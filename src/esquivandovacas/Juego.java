@@ -7,9 +7,12 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.*;
+import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+
+import dataBase.*;
 import jugador.*;
 import enemigo.*;
 
@@ -25,8 +28,11 @@ public class Juego extends JPanel{
 
     int juY, juX; //localizacion del jugador
     int carX,carY; //localizacion de la carretera
-    Jugador coche = new Tractor();
-    Enemigo en = new Capibara();
+
+    ArrayList<Jugador> listajug = new ArrayList<>();
+    ArrayList<Enemigo> listaen = new ArrayList<>();
+    int elecJu;
+    int elecEn;
     int numV; //numero de vacas en la carretera
     int vX[], vY[]; //arrays que contienen las localizaciones de las vacas
     int velV[];
@@ -44,12 +50,12 @@ public class Juego extends JPanel{
 
             @Override
             public void keyPressed(KeyEvent e) {//cuando presionamos una tecla
-                 coche.moverJugador(e);//mover el coche en la direccion indicada
+                 listajug.get(elecJu).moverJugador(e);//mover el coche en la direccion indicada
             }
 
             @Override
             public void keyReleased(KeyEvent e) {//cuando soltamos la tecla
-                coche.stopJugador(e);//dejar de mover el coche
+                listajug.get(elecJu).stopJugador(e);//dejar de mover el coche
             }
     });
         setFocusable(true);//indicamos que el JPanel es focuseable
@@ -63,6 +69,14 @@ public class Juego extends JPanel{
         puntos = 0; //inicializamos puntos
         nivel = 1; //inicializamos nivel
         seAcabo = false;//inicializamos se acabo en falso
+        listajug.add(new Tractor());
+        listajug.add(new Coche());
+        listajug.add(new Moto());
+        listaen.add(new Vaca());
+        listaen.add(new Capibara());
+        listaen.add(new Jabali());
+        elecJu = 0;
+        elecEn = 0;
     }
     //metodo para pintar todas las imagenes en la pantalla en posiciones especificas
     //la escena va a ser repintada cada vez que las posiciones cambian
@@ -76,14 +90,14 @@ public class Juego extends JPanel{
             if(carY <= 599 && carX <= 599) //si la localizacion del cruce de carretera es menor de 599 en x,y
                 obj.drawImage(getToolkit().getImage("C:\\Users\\34653\\IdeaProjects\\EsquivandoVacas\\Imagenes\\cross_road.png"),carX,carY,this);//dibujar el cruce de carreteras
             
-            coche.paint(g, juX, juY);//dibujar al jugador
+            listajug.get(elecJu).paint(g, juX, juY);//dibujar al jugador
 
             if(seAcabo)//si se acabo es verdad
-                en.paintS(g, juX, juY);
+                listaen.get(elecEn).paintS(g, juX, juY);
 
             if(this.numV > 0){//si el numero de vacas es mayor que cero
                 for(int i = 0; i < this.numV; i++)//por cada vaca
-                        en.paint(g, vX[i], vY[i]);
+                        listaen.get(elecEn).paint(g, vX[i], vY[i]);
                     }
 
             Font f = new Font("Times Roman", Font.BOLD + Font.ITALIC, 20);//inicializamos fuente
@@ -110,11 +124,11 @@ public class Juego extends JPanel{
             carY = carX = 999; //llevarlo de nuevo al inicio
         }
  
-        juX += coche.getVeloX(); //actualizar la posicion del coche
-        juY += coche.getVeloY();
+        juX += listajug.get(elecJu).getVeloX(); //actualizar la posicion del coche
+        juY += listajug.get(elecJu).getVeloY();
         
-        juX = coche.restringirX(juX);
-        juY = coche.restringirY(juY);
+        juX = listajug.get(elecJu).restringirX(juX);
+        juY = listajug.get(elecJu).restringirY(juY);
         
         for(int i = 0; i < this.numV; i++) //para todas las vacas
             this.vY[i] += velV[i]; //moverlas basandonos en la velocidad indicada
@@ -160,8 +174,17 @@ public class Juego extends JPanel{
         //metodo que se encarga de las funciones finales del juego
         public void finaliza(){
         seAcabo = true; //indicamos que el juego se ha acabado
-        String n = JOptionPane.showInputDialog("Introduce tu nombre"); //le pedimos al jugador que introduzca su nombre
-        Puntuacion pu = new Puntuacion(n, nivel, puntos); //creamos un objeto puntuacion con el nombre, nivel y puntos conseguidos
+        Conexion con = Conexion.getInstance();
+        Usuarios us = new Usuarios("Juan", "1624598");
+
+        if(con.crearUsuario(us))
+            JOptionPane.showMessageDialog(null, "Usuario creado");
+        else
+            JOptionPane.showMessageDialog(null, "Error en la creacion");
+            //id = con.iniciarSesion(us);
+        con.desconectar();
+
+        /*Puntuacion pu = new Puntuacion("Alejandro", nivel, puntos); //creamos un objeto puntuacion con el nombre, nivel y puntos conseguidos
         pu.laMejorPuntuacion("puntuaciones.txt", "\\s*,\\s*", pu); //llamamos al metodo mejor puntuacion
         pu.escribirPuntuacion("puntuaciones.txt", "\\s*,\\s*", pu);//llamamos al metodo escribir puntuacion
         pu.verMejoresPuntuacion("puntuaciones.txt", "\\s*,\\s*");  //llamamos al metodo ver mejores puntuaciones
@@ -169,7 +192,8 @@ public class Juego extends JPanel{
         if(s.equalsIgnoreCase("s")){ //si el jugador responde que si 
             Main.main(null); //comenzamos el juego de nuevo
         }
-        else //de no ser asi
+        else //de no ser asi*/
+
             System.exit(0); //finalizamos el juego
     }
 }
