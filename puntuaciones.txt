@@ -1,5 +1,0 @@
-Alejandro, 10, 0
-Alejandro, 10, 0
-alejandro, 9, 4
-Juan, 8, 4
-, 8, 4
