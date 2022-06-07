@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
-
+import LibreriaAlex.*;
 import dataBase.*;
 import jugador.*;
 import enemigo.*;
@@ -179,7 +179,7 @@ public class Juego extends JPanel{
         seAcabo = true; //indicamos que el juego se ha acabado
         Puntuacion pu = new Puntuacion(nivel, puntos); //creamos un objeto puntuacion con el nivel y los puntos alcanzados
         con.guardarPuntuacion(this.id, pu); //guardamos la puntuacion junto al id en la base de datos
-        String s=JOptionPane.showInputDialog("Quieres volver a jugar? s/n"); //le preguntamos al jugador si quiere volver a jugar
+        String s= LeerDatos.leerString("Quieres volver a jugar? s/n"); //le preguntamos al jugador si quiere volver a jugar
         if(s.equalsIgnoreCase("s")){ //si el jugador responde que si
             Tablero tp = new Tablero(); //comenzamos el juego de nuevo
         }

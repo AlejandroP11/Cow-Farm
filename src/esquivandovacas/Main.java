@@ -17,6 +17,5 @@ public class Main{
     public static void main(String[] args) {
         Menu1 mn1 = new Menu1();
         mn1.setVisible(true);
-
     }
 }
