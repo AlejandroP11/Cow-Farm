@@ -2,7 +2,8 @@
 
 ## Vista preelimiinar del juego 👀
 
-![1](https://github.com/AlejandroP11/Cow-Farm/tree/master/ImgReadme/previsualizarjuego.PNG)
+
+<img src="[https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Hi.gif](https://github.com/AlejandroP11/Cow-Farm/tree/master/ImgReadme/previsualizarjuego.PNG)" width="10px"> 
 <br/>
 
 El juego **Cow-Farm**, es un método de entretenimiento para el público juvenil. En este juego, el usuario dirige un vehículo con el que tiene que evitar atropellar a los diferentes tipos de animales que van apareciendo en el mapa.
