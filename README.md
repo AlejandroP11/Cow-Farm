@@ -23,7 +23,7 @@ S / 🔽 - RETROCEDE
 D / ▶️ - GIRA A LA DERECHA
 ```
 
-### Sistema de Registro y Login 👥
+## Sistema de Registro y Login 👥
 <br/>
 
 ![](https://github.com/AlejandroP11/Cow-Farm/tree/master/ImgReadme/menuregistro.PNG)
